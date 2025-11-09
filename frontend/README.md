@@ -13,7 +13,7 @@ SwiftUI iOS application for the AI Interactive Podcast platform.
 See [SETUP.md](SETUP.md) for detailed setup instructions.
 ```bash
 # From project root
-cd ios
+cd frontend/ios
 
 # Open in Xcode
 open AIPodcast.xcodeproj
@@ -23,33 +23,57 @@ xed .
 ```
 
 ## Project Structure
-
-- **Views/** - SwiftUI views organized by feature
-- **ViewModels/** - Observable objects for state management
-- **Models/** - Data models matching API responses
-- **Services/** - Networking, audio playback, speech recognition
-- **Utils/** - Helper functions, extensions, constants
+```
+AIPodcast/
+├── AIPodcastApp.swift       # App entry point
+├── ContentView.swift         # Main view with tab navigation
+├── Views/                    # UI components organized by feature
+│   ├── Upload/
+│   │   └── DocumentUploadView.swift
+│   ├── Player/
+│   │   ├── PodcastPlayerView.swift
+│   │   └── AudioWaveformView.swift
+│   └── Question/
+│       └── QuestionInputView.swift
+├── ViewModels/               # Observable objects for state management
+│   ├── DocumentUploadViewModel.swift
+│   ├── PodcastPlayerViewModel.swift
+│   └── QuestionViewModel.swift
+├── Models/                   # Data models matching API responses
+│   ├── Document.swift
+│   ├── Podcast.swift
+│   └── Question.swift
+├── Services/                 # Networking, audio, speech
+│   ├── APIClient.swift
+│   ├── AudioPlayer.swift
+│   └── SpeechRecognizer.swift
+└── Utils/                    # Helper functions
+    ├── Constants.swift
+    └── Extensions.swift
+```
 
 ## Architecture
 
-This app uses MVVM (Model-View-ViewModel) architecture:
-- **Views** observe **ViewModels**
-- **ViewModels** use **Services** to fetch data
-- **Services** communicate with backend API
+This app uses **MVVM** (Model-View-ViewModel) architecture:
+
+- **Views** - SwiftUI views that display UI
+- **ViewModels** - ObservableObjects that manage state and business logic
+- **Models** - Data structures matching API responses
+- **Services** - Reusable components (networking, audio, etc.)
 ```
 ┌─────────┐     ┌──────────────┐     ┌──────────┐     ┌─────────┐
 │  View   │────▶│  ViewModel   │────▶│ Service  │────▶│   API   │
 └─────────┘     └──────────────┘     └──────────┘     └─────────┘
      │                  │
      │                  ▼
-     └──────────── ObservableObject
+     └──────────── @Published State
 ```
 
 ## Key Features
 
 ### Document Upload
 - Select PDFs from Files app
-- Upload to backend
+- Upload to backend API
 - Show processing status
 
 ### Podcast Player
@@ -67,42 +91,56 @@ This app uses MVVM (Model-View-ViewModel) architecture:
 
 Backend API runs at: `http://localhost:8000` (development)
 
-For testing on device, you'll need to:
+**For testing on physical device:**
 1. Find your Mac's local IP: `ifconfig | grep inet`
-2. Update `Constants.swift` with IP address
-3. Ensure Mac and iPhone on same WiFi
-
-## Testing
-
-Run tests in Xcode:
-- ⌘ + U to run all tests
-- ⌘ + 6 to open test navigator
+2. Update `Utils/Constants.swift` with your Mac's IP
+3. Ensure Mac and iPhone on same WiFi network
 
 ## Common Issues
 
 **"Failed to connect to API"**
-- Check backend server is running: `cd ../backend && python main.py`
-- Check API base URL in `Constants.swift`
-- For device testing, use Mac's IP address not `localhost`
+- Check backend server is running: `cd ../../backend && python main.py`
+- Check API base URL in `Utils/Constants.swift`
+- For physical device: Use Mac's IP address, not `localhost`
 
 **"Microphone permission denied"**
-- Go to Settings → Privacy → Microphone
-- Enable for AI Podcast app
+- Settings → Privacy & Security → Microphone
+- Enable for AIPodcast app
 
 **Audio not playing**
 - Check device is not in silent mode
 - Check volume is up
-- Try in simulator first
+- Try simulator first to isolate device issues
 
-## Next Steps
+## Development
 
-1. Review the starter code in each file
-2. Check your assigned tickets in Linear
-3. Start with tickets labeled "iOS Setup"
-4. Ask questions in #apprentice-ai-podcast
+### Running the App
+
+1. Open `AIPodcast.xcodeproj` in Xcode
+2. Select target device/simulator
+3. Press ⌘+R to build and run
+
+### Running Tests
+
+- Press ⌘+U to run all tests
+- Or ⌘+6 to open test navigator
+
+### Code Style
+
+- Follow [Swift API Design Guidelines](https://swift.org/documentation/api-design-guidelines/)
+- Use descriptive variable names
+- Comment complex logic
+- Keep views small and focused
 
 ## Resources
 
 - [SwiftUI Tutorials](https://developer.apple.com/tutorials/swiftui)
 - [AVFoundation Guide](https://developer.apple.com/documentation/avfoundation)
 - [Speech Framework](https://developer.apple.com/documentation/speech)
+- [Async/Await in Swift](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html)
+
+## Need Help?
+
+1. Check [SETUP.md](SETUP.md) for setup issues
+2. Check [API_SPEC.md](../../docs/API_SPEC.md) for API details
+3. Post in Slack group chat
