@@ -34,8 +34,8 @@ backend/generated/answers/*
 backend/chroma_db/
 
 # iOS
-ios/DerivedData/
-ios/build/
+**/DerivedData/
+**/build/
 *.xcuserstate
 *.xcworkspace
 !*.xcworkspace/contents.xcworkspacedata
