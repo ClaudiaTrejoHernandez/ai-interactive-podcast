@@ -71,6 +71,39 @@ def test_semantic_splitting():
     print(f"Test 6 passed: All {len(result)} chunks preserve word boundaries")
 
 
+def test_chunk_size_limits():
+    """Test that chunks don't exceed maximum size"""
+    long_text = " ".join(["word"] * 5000)
+    result = chunk_text(long_text)
+    
+    for i, chunk in enumerate(result):
+        assert len(chunk) <= 2200, f"Chunk {i} exceeds size limit: {len(chunk)} chars"
+        if i < len(result) - 1:
+            assert len(chunk) >= 1800, f"Chunk {i} is too small: {len(chunk)} chars"
+    
+    print(f"Test 7 passed: All {len(result)} chunks within size limits")
+
+
+def test_return_type():
+    """Test that function returns correct type"""
+    result = chunk_text("test text")
+    
+    assert isinstance(result, list), f"Expected list, got {type(result)}"
+    assert all(isinstance(chunk, str) for chunk in result), "All chunks should be strings"
+    
+    print("Test 8 passed: Return type is correct (list of strings)")
+
+
+def test_no_empty_chunks():
+    """Test that no empty chunks are created"""
+    long_text = "This is a test. " * 500
+    chunks = chunk_text(long_text)
+    
+    for i, chunk in enumerate(chunks):
+        assert chunk.strip(), f"Chunk {i} is empty or whitespace-only"
+    
+    print(f"Test 9 passed: No empty chunks in {len(chunks)} total chunks")
+
 
 def run_all_tests():
     """Run all tests"""
@@ -85,6 +118,9 @@ def run_all_tests():
         test_long_text()
         test_chunk_overlap()
         test_semantic_splitting()
+        test_chunk_size_limits()
+        test_return_type()
+        test_no_empty_chunks()
         
         print("\n" + "="*50)
         print("ALL TESTS PASSED!")
@@ -92,10 +128,10 @@ def run_all_tests():
         return True
         
     except AssertionError as e:
-        print(f"\n TEST FAILED: {e}\n")
+        print(f"\nTEST FAILED: {e}\n")
         return False
     except Exception as e:
-        print(f"\n ERROR: {e}\n")
+        print(f"\nERROR: {e}\n")
         return False
 
 
