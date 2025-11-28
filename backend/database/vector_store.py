@@ -5,14 +5,17 @@ This manages document storage and semantic search.
 """
 
 from typing import List, Dict
+from datetime import datetime
+import logging
 
-#Import required libraries
 import chromadb
 from chromadb.utils import embedding_functions
 from config.settings import OPENAI_API_KEY, BASE_DIR
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-#Initialize Chroma client
+
 chroma_client = chromadb.PersistentClient(path=str(BASE_DIR / "chroma_db"))
 
 openai_ef = embedding_functions.OpenAIEmbeddingFunction(
@@ -26,13 +29,25 @@ collection = chroma_client.get_or_create_collection(
 )
 
 
-async def store_document_chunks(document_id: str, chunks: List[str]) -> None:
+async def store_document_chunks(
+    document_id: str,
+    chunks: List[str],
+    source: str = None
+) -> Dict[str, any]:
     """
-    Store document chunks in vector database.
+    Store document chunks in vector database with metadata.
     
     Args:
         document_id: Unique identifier for the document
         chunks: List of text chunks to store
+        source: Source filename (e.g., "machine_learning.pdf")
+        
+    Returns:
+        {
+            "status": "success" | "failed",
+            "chunks_stored": int,
+            "error": str (only if failed)
+        }
         
     What Happens Automatically:
         - Chroma creates embeddings for each chunk using OpenAI
@@ -44,23 +59,45 @@ async def store_document_chunks(document_id: str, chunks: List[str]) -> None:
         - What are embeddings?: https://platform.openai.com/docs/guides/embeddings
     """
     if not chunks:
-        return
+        logger.warning(f"No chunks to store for document {document_id}")
+        return {"status": "success", "chunks_stored": 0}
     
-    # Create unique IDs for each chunk (e.g., "doc_123_chunk_0")
-    ids = [f"{document_id}_chunk_{i}" for i in range(len(chunks))]
-    
-    # Create metadata for each chunk (document_id, chunk_index)
-    metadatas = [
-        {"document_id": document_id, "chunk_index": i}
-        for i in range(len(chunks))
-    ]
-    
-    # Add to collection (embeddings are created automatically by OpenAI)
-    collection.add(
-        documents=chunks,
-        ids=ids,
-        metadatas=metadatas
-    )
+    try:
+        timestamp = datetime.utcnow().isoformat() + "Z"
+        
+        ids = [f"{document_id}_chunk_{i}" for i in range(len(chunks))]
+        
+        metadatas = [
+            {
+                "document_id": document_id,
+                "chunk_index": i,
+                "source": source or "unknown",
+                "timestamp": timestamp
+            }
+            for i in range(len(chunks))
+        ]
+        
+        collection.add(
+            documents=chunks,
+            ids=ids,
+            metadatas=metadatas
+        )
+        
+        logger.info(f"Successfully stored {len(chunks)} chunks for document {document_id} (source: {source})")
+        
+        return {
+            "status": "success",
+            "chunks_stored": len(chunks)
+        }
+        
+    except Exception as e:
+        error_msg = f"Failed to store chunks for document {document_id}: {str(e)}"
+        logger.error(error_msg)
+        return {
+            "status": "failed",
+            "chunks_stored": 0,
+            "error": str(e)
+        }
 
 
 async def search_documents(query: str, document_ids: List[str] = None, n_results: int = 5) -> Dict:
@@ -90,19 +127,16 @@ async def search_documents(query: str, document_ids: List[str] = None, n_results
         Might find: "French military support was crucial..." 
         Even though "France" and "French" are different words!
     """
-    # Build where filter if document_ids provided
     where_filter = None
     if document_ids:
         where_filter = {"document_id": {"$in": document_ids}}
     
-    # Query the collection with semantic search
     results = collection.query(
         query_texts=[query],
         n_results=n_results,
         where=where_filter
     )
     
-    # Return formatted results
     return {
         "chunks": results['documents'][0] if results['documents'] else [],
         "ids": results['ids'][0] if results['ids'] else [],
@@ -127,10 +161,8 @@ async def get_all_chunks_for_documents(document_ids: List[str]) -> List[str]:
     if not document_ids:
         return []
     
-    # Query collection with document_id filter to get all matching chunks
     results = collection.get(
         where={"document_id": {"$in": document_ids}}
     )
     
-    # Return all matching chunks
     return results['documents'] if results['documents'] else []
