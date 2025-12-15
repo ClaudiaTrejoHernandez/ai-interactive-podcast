@@ -81,7 +81,7 @@ struct DocumentCard: View {
                             Text(".")
                                 .foregroundColor(.appTertiaryText)
                             Text(size)
-                                .font(.addCaption)
+                                .font(.appCaption)
                                 .foregroundColor(.appSecondaryText)
                         }
                     }
