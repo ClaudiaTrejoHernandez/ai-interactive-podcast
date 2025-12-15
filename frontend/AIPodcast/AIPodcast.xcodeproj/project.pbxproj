@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02975DCF2EECD3A800843580 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02975DCE2EECD3A000843580 /* DesignSystem.swift */; };
+		02975DD22EECDBFF00843580 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02975DD12EECDBF500843580 /* ButtonStyles.swift */; };
+		02975DD42EECE81B00843580 /* DocumentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02975DD32EECE80F00843580 /* DocumentCard.swift */; };
+		02975DD62EECF82500843580 /* PodcastCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02975DD52EECF81E00843580 /* PodcastCard.swift */; };
+		02975DD82EECFB0A00843580 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02975DD72EECFB0100843580 /* LoadingView.swift */; };
+		02975DDA2EECFB7E00843580 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02975DD92EECFB7700843580 /* EmptyStateView.swift */; };
 		02BB28DD2EE21BC5004CA6CC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C590EEAC2EC81D37007D62CC /* Constants.swift */; };
 		02BB290A2EE88897004CA6CC /* TestAPIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BB29092EE887CE004CA6CC /* TestAPIView.swift */; };
 		02BB29222EE889B7004CA6CC /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E8BBB62EE20569006B99D4 /* APIService.swift */; };
@@ -29,6 +35,13 @@
 
 /* Begin PBXFileReference section */
 		024E6FCF2EDA363D00D0D3DE /* AIPodcastTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AIPodcastTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		02975DCE2EECD3A000843580 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
+		02975DD12EECDBF500843580 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
+		02975DD32EECE80F00843580 /* DocumentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentCard.swift; sourceTree = "<group>"; };
+		02975DD52EECF81E00843580 /* PodcastCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastCard.swift; sourceTree = "<group>"; };
+		02975DD72EECFB0100843580 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		02975DD92EECFB7700843580 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		02975DDB2EF0B33A00843580 /* Untitled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untitled.swift; sourceTree = "<group>"; };
 		02BB29092EE887CE004CA6CC /* TestAPIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAPIView.swift; sourceTree = "<group>"; };
 		02E8BBAA2EE20210006B99D4 /* AIPodcastApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIPodcastApp.swift; sourceTree = "<group>"; };
 		02E8BBAB2EE20210006B99D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -73,6 +86,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02975DD02EECDBEB00843580 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				02975DD92EECFB7700843580 /* EmptyStateView.swift */,
+				02975DD72EECFB0100843580 /* LoadingView.swift */,
+				02975DD52EECF81E00843580 /* PodcastCard.swift */,
+				02975DD32EECE80F00843580 /* DocumentCard.swift */,
+				02975DD12EECDBF500843580 /* ButtonStyles.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		02E8BBB22EE203A6006B99D4 /* Documents */ = {
 			isa = PBXGroup;
 			children = (
@@ -85,13 +110,6 @@
 			children = (
 			);
 			path = Podcasts;
-			sourceTree = "<group>";
-		};
-		02E8BBB42EE203C1006B99D4 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Shared;
 			sourceTree = "<group>";
 		};
 		02E8BBB52EE2054C006B99D4 /* Services */ = {
@@ -137,11 +155,12 @@
 		C590EEA62EC81BBC007D62CC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				02975DDB2EF0B33A00843580 /* Untitled.swift */,
+				02975DD02EECDBEB00843580 /* Shared */,
 				02BB29092EE887CE004CA6CC /* TestAPIView.swift */,
 				02E8BBC12EE20B4A006B99D4 /* TestView.swift */,
 				02E8BBB22EE203A6006B99D4 /* Documents */,
 				02E8BBB32EE203B5006B99D4 /* Podcasts */,
-				02E8BBB42EE203C1006B99D4 /* Shared */,
 				C590EEA22EC81B9E007D62CC /* ContentView.swift */,
 			);
 			path = Views;
@@ -150,6 +169,7 @@
 		C590EEAA2EC81BE0007D62CC /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				02975DCE2EECD3A000843580 /* DesignSystem.swift */,
 				02E8BBB82EE205CF006B99D4 /* Extensions.swift */,
 				C590EEAC2EC81D37007D62CC /* Constants.swift */,
 			);
@@ -280,6 +300,12 @@
 				02BB29222EE889B7004CA6CC /* APIService.swift in Sources */,
 				C590EEA52EC81B9E007D62CC /* ContentView.swift in Sources */,
 				02E8BBAD2EE20210006B99D4 /* AIPodcastApp.swift in Sources */,
+				02975DD42EECE81B00843580 /* DocumentCard.swift in Sources */,
+				02975DDA2EECFB7E00843580 /* EmptyStateView.swift in Sources */,
+				02975DD62EECF82500843580 /* PodcastCard.swift in Sources */,
+				02975DD22EECDBFF00843580 /* ButtonStyles.swift in Sources */,
+				02975DD82EECFB0A00843580 /* LoadingView.swift in Sources */,
+				02975DCF2EECD3A800843580 /* DesignSystem.swift in Sources */,
 				02E8BBC22EE20B4D006B99D4 /* TestView.swift in Sources */,
 				02BB290A2EE88897004CA6CC /* TestAPIView.swift in Sources */,
 				02BB28DD2EE21BC5004CA6CC /* Constants.swift in Sources */,
