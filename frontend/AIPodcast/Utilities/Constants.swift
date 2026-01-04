@@ -33,8 +33,8 @@ struct Constants {
     // MARK: - App Configuration
     
     /// Maximum file size for PDF uploads (in bytes)
-    /// 10 MB = 10 * 1024 * 1024
-    static let maxFileSize: Int = 10_485_760
+    /// 50 MB = 50 * 1024 * 1024
+    static let maxFileSize: Int = 52_428_800
     
     /// Supported file types
     static let supportedFileTypes = ["pdf"]

@@ -21,6 +21,19 @@ enum UploadStatus {
     case error
 }
 
+extension SelectedFile {
+    var documentStatus: DocumentCard.DocumentStatus {
+        switch uploadStatus {
+        case .pending, .success:
+            return .ready
+        case .uploading:
+            return .uploading(progress: 1.0)
+        case .error:
+            return .failed
+        }
+    }
+}
+
 @MainActor
 class GenerateViewModel: ObservableObject {
     @Published var selectedFiles: [SelectedFile] = []
@@ -53,9 +66,9 @@ class GenerateViewModel: ObservableObject {
             let attributes = try FileManager.default.attributesOfItem(atPath: url.path)
             let fileSize = attributes[.size] as? Int64 ?? 0
             
-            // Check file size (10MB limit from Constants)
+            // Check file size (50MB limit from Constants)
             if fileSize > Constants.maxFileSize {
-                errorMessage = "File \(url.lastPathComponent) exceeds 10MB limit"
+                errorMessage = "File \(url.lastPathComponent) exceeds 50MB limit"
                 showError = true
                 return
             }
