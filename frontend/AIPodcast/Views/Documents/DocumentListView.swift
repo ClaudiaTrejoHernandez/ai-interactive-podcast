@@ -3,9 +3,9 @@ import SwiftUI
 struct DocumentListView: View {
     // Placeholder data
     let placeholderDocuments = [
-        "American Revolution.pdf",
-        "World War II.pdf",
-        "Ancient Greece.pdf"
+        "Java.pdf",
+        "Onboarding.pdf",
+        "Python.pdf"
     ]
     
     var body: some View {
