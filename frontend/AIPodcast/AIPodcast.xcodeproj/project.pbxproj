@@ -40,6 +40,7 @@
 		02E8BBAD2EE20210006B99D4 /* AIPodcastApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E8BBAA2EE20210006B99D4 /* AIPodcastApp.swift */; };
 		02E8BBBE2EE209B1006B99D4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 02E8BBBD2EE209B1006B99D4 /* Alamofire */; };
 		02E8BBC22EE20B4D006B99D4 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E8BBC12EE20B4A006B99D4 /* TestView.swift */; };
+		63C3F2A22EF629F400B856D7 /* CardButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C3F2A12EF629F400B856D7 /* CardButtonStyle.swift */; };
 		C590EEA52EC81B9E007D62CC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C590EEA22EC81B9E007D62CC /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +89,7 @@
 		02E8BBB72EE2057B006B99D4 /* AudioPlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerService.swift; sourceTree = "<group>"; };
 		02E8BBB82EE205CF006B99D4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		02E8BBC12EE20B4A006B99D4 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		63C3F2A12EF629F400B856D7 /* CardButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardButtonStyle.swift; sourceTree = "<group>"; };
 		C590EE922EC81A11007D62CC /* AIPodcast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIPodcast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C590EEA22EC81B9E007D62CC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C590EEAC2EC81D37007D62CC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				02975E4D2EF0B8DB00843580 /* LoadingView.swift */,
 				02975E4E2EF0B8DB00843580 /* PodcastCard.swift */,
 				026624EF2EEB479600640CA3 /* PodcastCardView.swift */,
+				63C3F2A12EF629F400B856D7 /* CardButtonStyle.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				029C772D2EE8D1BB007E9335 /* DocumentListView.swift in Sources */,
 				026624EC2EEB45EA00640CA3 /* UnpopulatedHomeView.swift in Sources */,
 				026624F22EEB488F00640CA3 /* AddFileSection.swift in Sources */,
+				63C3F2A22EF629F400B856D7 /* CardButtonStyle.swift in Sources */,
 				026624F62EEB7F7200640CA3 /* GenerateButton.swift in Sources */,
 				029C772B2EE8D1AD007E9335 /* DocumentTabView.swift in Sources */,
 				029C772F2EE8D1E0007E9335 /* PodcastTabView.swift in Sources */,
@@ -472,7 +476,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.examplet.AIPodcastTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -494,7 +498,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.examplet.AIPodcastTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
