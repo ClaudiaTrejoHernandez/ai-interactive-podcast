@@ -16,13 +16,8 @@ struct GenerateButton: View {
                     Text("Generate Podcast")
                 }
             }
-            .font(.headline)
-            .foregroundColor(.white)
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(isGenerating ? Color.gray : Color.blue)
-            .cornerRadius(12)
         }
+        .buttonStyle(PrimaryButtonStyle(isEnabled: !isGenerating))
         .disabled(isGenerating)
     }
 }

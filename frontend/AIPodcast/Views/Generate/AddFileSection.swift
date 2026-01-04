@@ -9,7 +9,7 @@ struct AddFileSection: View {
             HStack {
                 Image(systemName: "plus.circle.fill")
                     .font(.system(size: hasFiles ? 24 : 30))
-                    .foregroundColor(.blue)
+                    .foregroundColor(.appPrimary)
                 
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Add file")
@@ -23,10 +23,8 @@ struct AddFileSection: View {
                 Spacer()
             }
             .padding()
-            .background(Color.gray.opacity(0.1))
-            .cornerRadius(12)
         }
-        .buttonStyle(PlainButtonStyle())
+        .buttonStyle(CardButtonStyle())
     }
 }
 

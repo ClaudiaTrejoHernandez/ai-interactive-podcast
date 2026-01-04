@@ -2,9 +2,16 @@ import SwiftUI
 
 struct DocumentTabView: View {
     var body: some View {
-        NavigationStack {
-            DocumentListView()
-                .navigationTitle("Documents")
+        if #available(iOS 16.0, *) {
+            NavigationStack {
+                DocumentListView()
+                    .navigationTitle("Documents")
+            }
+        } else {
+            NavigationView {
+                DocumentListView()
+                    .navigationTitle("Documents")
+            }
         }
     }
 }
