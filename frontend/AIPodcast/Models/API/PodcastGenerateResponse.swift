@@ -13,3 +13,20 @@ struct PodcastGenerateResponse: Codable, Sendable {
         case durationSeconds = "duration_seconds"
     }
 }
+
+struct PodcastStatusResponse: Codable, Sendable {
+    let podcastId: String
+    let status: String
+    let audioUrl: String?
+    let durationSeconds: Int?
+    let currentStage: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case podcastId = "podcast_id"
+        case status
+        case audioUrl = "audio_url"
+        case durationSeconds = "duration_seconds"
+        case currentStage = "current_stage"
+    }
+}
+
