@@ -128,21 +128,37 @@ class GenerateViewModel: ObservableObject {
                 // Generate default topic from filenames
                 let topic = selectedFiles.map { $0.name.replacingOccurrences(of: ".pdf", with: "") }.joined(separator: ", ")
                 
+                // 1. Initiate generation
                 let podcast = try await APIService.shared.generatePodcast(
                     documentIds: documentIds,
                     topic: topic,
                     durationMinutes: 3
                 )
                 
-                // Add to app state
-                AppState.shared.addGeneratedPodcast(podcast)
+                let podcastId = podcast.id
                 
-                // Open player
-                AppState.shared.openPlayer(podcast: podcast)
-                
-                // Reset state
-                selectedFiles.removeAll()
-                isGenerating = false
+                // 2. Poll for completion
+                while true {
+                    try await Task.sleep(nanoseconds: 3_000_000_000)
+                    
+                    let status = try await APIService.shared.getPodcastStatus(podcastId: podcastId)
+                    
+                    if status.status == .ready {
+                        // Success - open player
+                        AppState.shared.addGeneratedPodcast(status)
+                        AppState.shared.openPlayer(podcast: status)
+                        selectedFiles.removeAll()
+                        isGenerating = false
+                        break
+                    } else if status.status == .failed {
+                        // Failed
+                        isGenerating = false
+                        errorMessage = "Podcast generation failed"
+                        showError = true
+                        break
+                    }
+                    // Still generating - continue polling
+                }
                 
             } catch {
                 isGenerating = false
