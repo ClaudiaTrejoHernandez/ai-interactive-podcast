@@ -34,8 +34,8 @@ struct LoadingOverlay: View {
     
     var body: some View {
         ZStack {
-            // Orange background overlay
-            Color.appOrange
+            // White background overlay
+            Color.white
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
@@ -46,21 +46,21 @@ struct LoadingOverlay: View {
                     // Icon
                     Image(systemName: tips[currentTipIndex].icon)
                         .font(.system(size: 60))
-                        .foregroundColor(.white)
+                        .foregroundColor(.appOrange)
                         .transition(.opacity)
                     
                     // Title
                     Text(tips[currentTipIndex].title)
                         .font(.title2)
                         .fontWeight(.bold)
-                        .foregroundColor(.white)
+                        .foregroundColor(.appOrange)
                         .multilineTextAlignment(.center)
                         .transition(.opacity)
                     
                     // Description
                     Text(tips[currentTipIndex].description)
                         .font(.body)
-                        .foregroundColor(.white.opacity(0.9))
+                        .foregroundColor(.appOrange.opacity(0.9))
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 40)
                         .transition(.opacity)
@@ -73,18 +73,18 @@ struct LoadingOverlay: View {
                 VStack(spacing: 12) {
                     Text("Generating your podcast...")
                         .font(.subheadline)
-                        .foregroundColor(.white)
+                        .foregroundColor(.appOrange)
                     
                     GeometryReader { geometry in
                         ZStack(alignment: .leading) {
                             // Background track
                             RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.white.opacity(0.3))
+                                .fill(Color.appOrange.opacity(0.3))
                                 .frame(height: 8)
                             
                             // Progress fill
                             RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.white)
+                                .fill(Color.appOrange)
                                 .frame(width: geometry.size.width * progress, height: 8)
                                 .animation(.linear(duration: 0.3), value: progress)
                         }
